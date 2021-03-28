@@ -1,3 +1,3 @@
 # weather
 
-University projet made in Flutter.
+University project made in Flutter.
