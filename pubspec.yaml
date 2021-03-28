@@ -11,10 +11,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  carousel_slider: ^3.0.0
   cupertino_icons: ^1.0.2
-
+  get_it: ^6.0.0
+  http: ^0.13.0
   location: ^4.1.1
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
