@@ -1,16 +1,4 @@
-enum WeatherCondition {
-  thunderstorm,
-  drizzle,
-  rain,
-  snow,
-  atmosphere, // dust, ash, fog, sand etc.
-  mist,
-  fog,
-  lightCloud,
-  heavyCloud,
-  clear,
-  unknown
-}
+import 'package:weather/core/enums/weather_condition.dart';
 
 class Weather {
   final WeatherCondition condition;
@@ -22,6 +10,7 @@ class Weather {
   final double pressure;
   final int cloudiness;
   final DateTime date;
+  final bool isDay;
 
   Weather(
       {this.condition,
@@ -32,14 +21,26 @@ class Weather {
       this.humidity,
       this.pressure,
       this.cloudiness,
-      this.date});
+      this.date,
+      this.isDay});
 
   static Weather fromDailyJson(dynamic daily) {
-    var cloudiness = daily['clouds']['all'];
+    int cloudiness = daily['clouds']['all'].toInt();
     var weather = daily['weather'][0];
 
+    var date =
+        DateTime.fromMillisecondsSinceEpoch(daily['dt'] * 1000, isUtc: true);
+
+    var sunrise = DateTime.fromMillisecondsSinceEpoch(
+        daily['sys']['sunrise'] * 1000,
+        isUtc: true);
+
+    var sunset = DateTime.fromMillisecondsSinceEpoch(
+        daily['sys']['sunset'] * 1000,
+        isUtc: true);
+
     return Weather(
-        condition: mapStringToWeatherCondition(weather['main']),
+        condition: mapStringToWeatherCondition(weather['main'], cloudiness),
         description: weather['description'],
         locationName: daily['name'],
         cloudiness: cloudiness,
@@ -48,10 +49,11 @@ class Weather {
         humidity: daily['main']['humidity'].toDouble(),
         pressure: daily['main']['pressure'].toDouble(),
         date: DateTime.fromMillisecondsSinceEpoch(daily['dt'] * 1000,
-            isUtc: true));
+            isUtc: true),
+        isDay: date.isAfter(sunrise) && date.isBefore(sunset));
   }
 
-  static WeatherCondition mapStringToWeatherCondition(String input) {
+  static WeatherCondition mapStringToWeatherCondition(String input, int cloudiness) {
     WeatherCondition condition;
     switch (input) {
       case 'Thunderstorm':
@@ -70,7 +72,9 @@ class Weather {
         condition = WeatherCondition.clear;
         break;
       case 'Clouds':
-        condition = WeatherCondition.lightCloud;
+        condition = (cloudiness >= 85)
+            ? WeatherCondition.heavyCloud
+            : WeatherCondition.lightCloud;
         break;
       case 'Mist':
         condition = WeatherCondition.mist;

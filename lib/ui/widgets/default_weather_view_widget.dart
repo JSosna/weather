@@ -5,6 +5,7 @@ import 'package:weather/core/viewmodels/weather_view_model.dart';
 import 'helper_weather_view_functions.dart';
 import 'large_details_box.dart';
 import 'small_details_box.dart';
+import 'weather_image.dart';
 
 class DefaultWeatherViewWidget extends StatelessWidget {
   final WeatherViewModel _viewModel;
@@ -20,9 +21,6 @@ class DefaultWeatherViewWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 10,
-            ),
             Column(
               children: [
                 Row(
@@ -31,14 +29,16 @@ class DefaultWeatherViewWidget extends StatelessWidget {
                   ],
                 ),
                 SizedBox(
-                  height: 8,
+                  height: 2,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     LargeDetailsBox(
-                        "Temperature", largeDescriptionContent("${_viewModel.temp.round()}°C"), 170)
+                        "Temperature",
+                        largeDescriptionContent("${_viewModel.temp.round()}°C"),
+                        170)
                   ],
                 ),
                 Row(
@@ -46,8 +46,17 @@ class DefaultWeatherViewWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     SmallDetailsBox(
-                        "Feels Like", smallDescriptionContent("${_viewModel.feelsLike.round()}°C"), 114),
-                    SmallDetailsBox("Lol", Container(), 114)
+                        "Feels Like",
+                        smallDescriptionContent(
+                            "${_viewModel.feelsLike.round()}°C"),
+                        114),
+                    SmallDetailsBox(
+                        null,
+                        Center(
+                            child: Container(
+                                child: getWeatherImage(_viewModel.condition,
+                                    _viewModel.isDaytime, 100))),
+                        114)
                   ],
                 ),
                 Row(
@@ -60,9 +69,15 @@ class DefaultWeatherViewWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     SmallDetailsBox(
-                        "Humidity", smallDescriptionContent("${_viewModel.humidity.round()}%"), 114),
+                        "Humidity",
+                        smallDescriptionContent(
+                            "${_viewModel.humidity.round()}%"),
+                        114),
                     SmallDetailsBox(
-                        "Pressure", smallDescriptionContent("${_viewModel.pressure.round()}"), 114)
+                        "Pressure",
+                        smallDescriptionContent(
+                            "${_viewModel.pressure.round()}"),
+                        114)
                   ],
                 ),
               ],

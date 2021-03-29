@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/core/enums/viewstate.dart';
+import 'package:weather/core/utils/toast_utils.dart';
 import 'package:weather/core/viewmodels/choose_location_view_model.dart';
 
 import 'base_view.dart';
@@ -70,6 +71,9 @@ class _ChooseLocationViewState extends State<ChooseLocationView> {
                           if (weather != null) {
                             Navigator.pushNamed(context, 'weather',
                                 arguments: weather);
+                          } else {
+                            controller.clear();
+                            ToastUtils.showCustomToast(context, "Location not found!");
                           }
                         },
                         child: Icon(Icons.navigation, size: 28),

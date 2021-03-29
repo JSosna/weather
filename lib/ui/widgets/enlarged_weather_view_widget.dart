@@ -4,6 +4,8 @@ import 'package:weather/core/viewmodels/weather_view_model.dart';
 
 import 'helper_weather_view_functions.dart';
 import 'large_details_box.dart';
+import 'small_details_box.dart';
+import 'weather_image.dart';
 
 
 class EnlargedWeatherViewWidget extends StatefulWidget {
@@ -36,39 +38,61 @@ class _EnlargedWeatherViewWidgetState extends State<EnlargedWeatherViewWidget> {
   @override
   Widget build(BuildContext context) {
     List cardList = [
-      LargeDetailsBox("FEELS LIKE", largeDescriptionContent("${_viewModel.feelsLike.round()}°C"), 170),
-      LargeDetailsBox("HUMIDITY", largeDescriptionContent("${_viewModel.humidity.round()}%"), 170),
-      LargeDetailsBox("PRESSURE", largeDescriptionContent("${_viewModel.pressure.round()}°C"), 170),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+        child: LargeDetailsBox("FEELS LIKE", largeDescriptionContent("${_viewModel.feelsLike.round()}°C"), 170, true),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+        child: LargeDetailsBox("HUMIDITY", largeDescriptionContent("${_viewModel.humidity.round()}%"), 170, true),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+        child: LargeDetailsBox("PRESSURE", largeDescriptionContent("${_viewModel.pressure.round()}"), 170, true),
+      ),
     ];
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 12.0),
+      padding: EdgeInsets.symmetric(horizontal: 0.0),
       child: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 10,
-            ),
             Column(
               children: [
-                Row(
-                  children: [
-                    cityLabel(_viewModel.city),
-                  ],
-                ),
-                SizedBox(
-                  height: 8,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                  child: Row(
+                    children: [
+                      cityLabel(_viewModel.city),
+                    ],
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.max,
                   children: [
-                    LargeDetailsBox(
-                        "Temperature", largeDescriptionContent("${_viewModel.temp.round()}°C"), 170)
-                  ],
+                    Container(
+                      padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+                      margin: EdgeInsets.all(6.0),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20), color: Colors.white),
+                      child: getWeatherImage(_viewModel.condition, _viewModel.isDaytime, 120))
+                      ],
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      LargeDetailsBox(
+                          "Temperature", largeDescriptionContent("${_viewModel.temp.round()}°C"), 170, true)
+                    ],
+                  ),
+                ),
+                
                 Stack(
                   alignment: Alignment.bottomCenter,
                   children: [

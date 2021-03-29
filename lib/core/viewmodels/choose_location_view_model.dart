@@ -21,6 +21,9 @@ class ChooseLocationViewModel extends BaseViewModel {
     setState(ViewState.Busy);
 
     var success = await _weatherService.getWeatherFromCity(city);
+    if (success == null) {
+      print("ok");
+    }
 
     setState(ViewState.Idle);
 

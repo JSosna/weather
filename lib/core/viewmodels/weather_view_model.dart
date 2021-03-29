@@ -1,4 +1,5 @@
 import 'package:weather/core/api/open_weather_map_api.dart';
+import 'package:weather/core/enums/weather_condition.dart';
 import 'package:weather/core/models/weather.dart';
 import 'package:weather/core/services/weather_service.dart';
 import 'package:weather/core/utils/temperature_conversions.dart';
@@ -71,5 +72,6 @@ class WeatherViewModel extends BaseViewModel {
     _feelsLike = TemperatureConversions.kelvinToCelsius(weather.feelLikeTemp);
     _humidity = weather.humidity;
     _pressure = weather.pressure;
+    _isDayTime = weather.isDay;
   }
 }

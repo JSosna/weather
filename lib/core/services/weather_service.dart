@@ -9,6 +9,11 @@ class WeatherService {
 
   Future<Weather> getWeatherFromCity(String city) async {
     final location = await weatherApi.getLocation(city);
+
+    if (location == null) {
+      return null;
+    }
+
     return await weatherApi.getWeather(location);
   }
 

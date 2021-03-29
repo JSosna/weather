@@ -14,10 +14,11 @@ class SmallDetailsBox extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints(maxHeight: _height),
         padding: EdgeInsets.fromLTRB(12.0, 10.0, 12.0, 0),
-        margin: EdgeInsets.all(12.0),
+        margin: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20), color: Colors.white),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          if(_title != null)
           FittedBox(
             child: Text(
               _title.toUpperCase(),

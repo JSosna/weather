@@ -16,8 +16,9 @@ class OpenWeatherMapApi extends WeatherApi {
     final response = await client.get(Uri.parse(requestUrl));
 
     if (response.statusCode != 200) {
-      throw Exception(
-          'error retrieving location for city $city: ${response.statusCode}');
+      //throw Exception(
+          //'error retrieving location for city $city: ${response.statusCode}');
+      return null;
     }
 
     return Location.fromJson(jsonDecode(response.body));
