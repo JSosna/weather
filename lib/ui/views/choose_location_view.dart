@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:weather/core/enums/viewstate.dart';
 import 'package:weather/core/utils/toast_utils.dart';
 import 'package:weather/core/viewmodels/choose_location_view_model.dart';
+import 'package:weather/ui/shared/app_colors.dart';
 
 import 'base_view.dart';
 
@@ -26,7 +27,7 @@ class _ChooseLocationViewState extends State<ChooseLocationView> {
           backgroundColor: Colors.white,
         ),
         body: Container(
-          color: Color(0xff6CCAFF),
+          color: primaryColor,
           child: Column(
             children: [
               if (vm.state == ViewState.Busy) LinearProgressIndicator(),
@@ -79,7 +80,7 @@ class _ChooseLocationViewState extends State<ChooseLocationView> {
                         child: Icon(Icons.navigation, size: 28),
                         style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                                Color(0xff6CB0FF))),
+                                primaryDarkColor)),
                       ),
                     ),
                   ],
@@ -114,7 +115,7 @@ class _ChooseLocationViewState extends State<ChooseLocationView> {
                   child: Icon(
                     Icons.location_pin,
                     size: 48,
-                    color: Color(0xff6CCAFF),
+                    color: primaryColor,
                   ),
                   style: ButtonStyle(
                       shape: MaterialStateProperty.all<RoundedRectangleBorder>(

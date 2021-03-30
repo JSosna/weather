@@ -1,3 +1,4 @@
+/// Class that stores information about [longitude] and [latitude].
 class Location {
   final double longitude;
   final double latitude;

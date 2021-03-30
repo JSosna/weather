@@ -1,5 +1,6 @@
 import 'dart:async';
 
+
 import 'package:flutter/material.dart';
 import 'toast_message_animation.dart';
 
@@ -19,7 +20,6 @@ class ToastUtils {
         }
       });
     }
-    
   }
 
   static OverlayEntry createOverlayEntry(BuildContext context,

@@ -1,12 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:weather/core/viewmodels/weather_view_model.dart';
+import 'package:weather/ui/shared/app_colors.dart';
 
 import 'helper_weather_view_functions.dart';
 import 'large_details_box.dart';
-import 'small_details_box.dart';
 import 'weather_image.dart';
-
 
 class EnlargedWeatherViewWidget extends StatefulWidget {
   final WeatherViewModel _viewModel;
@@ -14,18 +13,16 @@ class EnlargedWeatherViewWidget extends StatefulWidget {
   EnlargedWeatherViewWidget(this._viewModel);
 
   @override
-  _EnlargedWeatherViewWidgetState createState() => _EnlargedWeatherViewWidgetState(_viewModel);
+  _EnlargedWeatherViewWidgetState createState() =>
+      _EnlargedWeatherViewWidgetState(_viewModel);
 }
 
 class _EnlargedWeatherViewWidgetState extends State<EnlargedWeatherViewWidget> {
-
   WeatherViewModel _viewModel;
 
   _EnlargedWeatherViewWidgetState(this._viewModel);
 
   int _currentIndex = 0;
-
-  
 
   List<T> map<T>(List list, Function handler) {
     List<T> result = [];
@@ -40,15 +37,30 @@ class _EnlargedWeatherViewWidgetState extends State<EnlargedWeatherViewWidget> {
     List cardList = [
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-        child: LargeDetailsBox("FEELS LIKE", largeDescriptionContent("${_viewModel.feelsLike.round()}°C"), 170, true),
+        child: LargeDetailsBox(
+            "FEELS LIKE",
+            largeDescriptionContent(
+                "${_viewModel.feelsLike.round()}°C", darkModePrimaryColor),
+            170,
+            true),
       ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-        child: LargeDetailsBox("HUMIDITY", largeDescriptionContent("${_viewModel.humidity.round()}%"), 170, true),
+        child: LargeDetailsBox(
+            "HUMIDITY",
+            largeDescriptionContent(
+                "${_viewModel.humidity.round()}%", darkModePrimaryColor),
+            170,
+            true),
       ),
       Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
-        child: LargeDetailsBox("PRESSURE", largeDescriptionContent("${_viewModel.pressure.round()}"), 170, true),
+        child: LargeDetailsBox(
+            "PRESSURE",
+            largeDescriptionContent(
+                "${_viewModel.pressure.round()}", darkModePrimaryColor),
+            170,
+            true),
       ),
     ];
 
@@ -62,10 +74,11 @@ class _EnlargedWeatherViewWidgetState extends State<EnlargedWeatherViewWidget> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                   child: Row(
                     children: [
-                      cityLabel(_viewModel.city),
+                      cityLabel(_viewModel.city, darkModePrimaryColor),
                     ],
                   ),
                 ),
@@ -74,25 +87,32 @@ class _EnlargedWeatherViewWidgetState extends State<EnlargedWeatherViewWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
-                      margin: EdgeInsets.all(6.0),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20), color: Colors.white),
-                      child: getWeatherImage(_viewModel.condition, _viewModel.isDaytime, 120))
-                      ],
+                        padding: EdgeInsets.fromLTRB(10.0, 0, 10.0, 0),
+                        margin: EdgeInsets.all(6.0),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: Colors.white),
+                        child: getWeatherImage(
+                            _viewModel.condition, _viewModel.isDaytime, 120))
+                  ],
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       LargeDetailsBox(
-                          "Temperature", largeDescriptionContent("${_viewModel.temp.round()}°C"), 170, true)
+                          "Temperature",
+                          largeDescriptionContent(
+                              "${_viewModel.temp.round()}°C",
+                              darkModePrimaryColor),
+                          170,
+                          true)
                     ],
                   ),
                 ),
-                
                 Stack(
                   alignment: Alignment.bottomCenter,
                   children: [
@@ -102,8 +122,7 @@ class _EnlargedWeatherViewWidgetState extends State<EnlargedWeatherViewWidget> {
                         viewportFraction: 1,
                         autoPlay: true,
                         autoPlayInterval: Duration(seconds: 6),
-                        autoPlayAnimationDuration:
-                            Duration(milliseconds: 800),
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
                         autoPlayCurve: Curves.fastOutSlowIn,
                         pauseAutoPlayOnTouch: true,
                         aspectRatio: 2.0,
@@ -129,7 +148,7 @@ class _EnlargedWeatherViewWidgetState extends State<EnlargedWeatherViewWidget> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _currentIndex == index
-                                ? Color(0xff6CCAFF)
+                                ? darkModePrimaryColor
                                 : Color(0xffcccccc),
                           ),
                         );

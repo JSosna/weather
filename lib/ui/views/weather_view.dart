@@ -29,7 +29,7 @@ class _WeatherViewState extends State<WeatherView> {
     return BaseView<WeatherViewModel>(
       onModelReady: (vm) => {vm.updateModel(_weather)},
       builder: (context, vm, child) => Scaffold(
-          backgroundColor: primaryColor,
+          backgroundColor: _largerView ? darkModePrimaryColor : primaryColor,
           appBar: AppBar(
             actions: [
               IconButton(

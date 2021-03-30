@@ -1,5 +1,6 @@
 import 'package:weather/core/enums/weather_condition.dart';
 
+/// Stores data about weather that is used in weather views.
 class Weather {
   final WeatherCondition condition;
   final String description;
@@ -28,6 +29,8 @@ class Weather {
     int cloudiness = daily['clouds']['all'].toInt();
     var weather = daily['weather'][0];
 
+    // To find out if it is day or night app uses current date, 
+    // sunrise, sunset in current location.
     var date =
         DateTime.fromMillisecondsSinceEpoch(daily['dt'] * 1000, isUtc: true);
 

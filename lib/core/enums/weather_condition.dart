@@ -1,3 +1,4 @@
+/// Possible conditions that can be returned by Open Weather Map Api
 enum WeatherCondition {
   thunderstorm,
   drizzle,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather/locator.dart';
 
-
+/// Base class every view in this app extends.
 class BaseView<T extends ChangeNotifier> extends StatefulWidget {
   final Widget Function(BuildContext context, T value, Widget child) builder;
   final Function(T) onModelReady;

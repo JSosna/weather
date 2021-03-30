@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:weather/ui/shared/app_colors.dart';
 
-Widget cityLabel(String name) {
+Widget cityLabel(String name, [Color textColor=primaryColor]) {
   return Expanded(
     child: Container(
       padding: EdgeInsets.all(10.0),
@@ -14,7 +15,7 @@ Widget cityLabel(String name) {
             style: TextStyle(
                 fontSize: 28,
                 fontWeight: FontWeight.bold,
-                color: Color(0xff6CCAFF)),
+                color: textColor),
           ),
         ),
       ]),
@@ -36,7 +37,7 @@ Widget weatherDescription(String description) {
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Color(0xff6CCAFF)),
+                color: primaryColor),
           ),
         ),
       ]),
@@ -44,23 +45,23 @@ Widget weatherDescription(String description) {
   );
 }
 
-Widget smallDescriptionContent(String text) {
+Widget smallDescriptionContent(String text, [Color textColor = primaryColor]) {
   return Center(
     child: FittedBox(
       child: Text(
         text,
-        style: TextStyle(fontSize: 70.0, color: Color(0xff6CCAFF)),
+        style: TextStyle(fontSize: 70.0, color: textColor),
       ),
     ),
   );
 }
 
-Widget largeDescriptionContent(String text) {
+Widget largeDescriptionContent(String text, [Color textColor = primaryColor]) {
   return Center(
     child: FittedBox(
       child: Text(
         text,
-        style: TextStyle(fontSize: 109.0, color: Color(0xff6CCAFF)),
+        style: TextStyle(fontSize: 109.0, color: textColor),
       ),
     ),
   );
